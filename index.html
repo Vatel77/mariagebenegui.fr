@@ -135,29 +135,20 @@
 
                 <div
                     style="background: var(--white); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                    <div style="margin-bottom: 2rem;">
-                        <h4 style="margin-bottom: 1rem;">Envoyer des photos (Sélection multiple)</h4>
-                        <input type="file" id="file-upload" multiple accept="image/*" style="display: none;">
-                        <label for="file-upload" class="btn">Choisir des photos</label>
-                        <p id="file-count" style="margin-top: 0.5rem; font-style: italic;">Aucun fichier sélectionné</p>
-                    </div>
 
-                    <div style="border-top: 1px solid #eee; margin: 2rem 0;"></div>
+                    <p style="margin-bottom: 2rem;">
+                        Comme nous utilisons un hébergement léger (GitHub Pages), nous ne pouvons pas recevoir les
+                        photos directement ici.<br>
+                        Mais nous serions ravis de voir vos clichés !
+                    </p>
 
                     <div style="margin-bottom: 2rem;">
-                        <h4 style="margin-bottom: 1rem;">Envoyer tout un dossier</h4>
-                        <input type="file" id="folder-upload" webkitdirectory directory multiple style="display: none;">
-                        <label for="folder-upload" class="btn"
-                            style="background-color: var(--secondary-color); border-color: var(--secondary-color);">Choisir
-                            un dossier</label>
-                        <p id="folder-count" style="margin-top: 0.5rem; font-style: italic;">Aucun dossier sélectionné
-                        </p>
+                        <h4 style="margin-bottom: 1rem;">Ajouter vos photos sur notre album partagé</h4>
+                        <a href="https://photos.app.goo.gl/9YVHHdyPJ97T7zyg7" target="_blank" class="btn"
+                            style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
+                            Accéder à l'album partagé
+                        </a>
                     </div>
-
-                    <button id="upload-btn" class="btn" style="width: 100%; margin-top: 2rem; display: none;">Lancer le
-                        téléchargement</button>
-
-                    <div id="upload-feedback" style="margin-top: 1rem; font-weight: bold;"></div>
                 </div>
             </div>
         </div>

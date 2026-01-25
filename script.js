@@ -27,113 +27,47 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                message: formData.get('message')
-            };
-
+            
             const feedback = document.getElementById('form-feedback');
             feedback.textContent = 'Envoi en cours...';
+            feedback.style.color = 'var(--text-color)';
 
             try {
-                const response = await fetch('/api/guestbook', {
+                const response = await fetch('https://formspree.io/f/mlgjqnvw', {
                     method: 'POST',
+                    body: formData,
                     headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                        'Accept': 'application/json'
+                    }
                 });
 
                 const result = await response.json();
 
                 if (response.ok) {
-                    feedback.textContent = 'Merci ! Votre message a bien été enregistré.';
+                    feedback.textContent = 'Merci ! Votre message a bien été envoyé.';
                     feedback.style.color = 'green';
                     form.reset();
                 } else {
-                    feedback.textContent = 'Erreur : ' + (result.error || 'Une erreur est survenue.');
+                    feedback.textContent = 'Oups ! Il y a eu un problème lors de l\'envoi du formulaire.';
+                    if (result.errors) {
+                         feedback.textContent += ' (' + result.errors.map(error => error.message).join(', ') + ')';
+                    }
                     feedback.style.color = 'red';
                 }
             } catch (error) {
                 console.error('Error:', error);
-                feedback.textContent = 'Erreur de connexion au serveur.';
+                feedback.textContent = 'Erreur de connexion au service d\'envoi.';
                 feedback.style.color = 'red';
             }
         });
     }
 
-    // Photo Upload Handler
-    const fileInput = document.getElementById('file-upload');
-    const folderInput = document.getElementById('folder-upload');
-    const uploadBtn = document.getElementById('upload-btn');
-    const fileCount = document.getElementById('file-count');
-    const folderCount = document.getElementById('folder-count');
-    const uploadFeedback = document.getElementById('upload-feedback');
-
-    let filesToUpload = [];
-
-    function updateFileList(e) {
-        const newFiles = Array.from(e.target.files);
-        if (newFiles.length > 0) {
-            filesToUpload = newFiles; // Replace simple selection
-            // For folder upload, we can append but usually replacing is less confusing for simple UX
-
-            if (e.target.id === 'file-upload') {
-                fileCount.textContent = `${newFiles.length} photo(s) sélectionnée(s)`;
-                folderCount.textContent = 'Aucun dossier sélectionné';
-                folderInput.value = ''; // Clear other input
-            } else {
-                folderCount.textContent = `${newFiles.length} fichier(s) dans le dossier`;
-                fileCount.textContent = 'Aucun fichier sélectionné';
-                fileInput.value = ''; // Clear other input
-            }
-            uploadBtn.style.display = 'inline-block';
-        }
-    }
-
-    if (fileInput) fileInput.addEventListener('change', updateFileList);
-    if (folderInput) folderInput.addEventListener('change', updateFileList);
-
-    if (uploadBtn) {
-        uploadBtn.addEventListener('click', async () => {
-            if (filesToUpload.length === 0) return;
-
-            uploadFeedback.textContent = 'Téléchargement en cours... Veuillez patienter.';
-            uploadFeedback.style.color = 'var(--text-color)';
-            uploadBtn.disabled = true;
-
-            const formData = new FormData();
-            filesToUpload.forEach(file => {
-                formData.append('photos', file);
-            });
-
-            try {
-                const response = await fetch('/api/upload', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    uploadFeedback.textContent = result.message;
-                    uploadFeedback.style.color = 'green';
-                    filesToUpload = [];
-                    fileInput.value = '';
-                    folderInput.value = '';
-                    fileCount.textContent = 'Aucun fichier sélectionné';
-                    folderCount.textContent = 'Aucun dossier sélectionné';
-                    uploadBtn.style.display = 'none';
-                    uploadBtn.disabled = false;
-                } else {
-                    throw new Error('Upload failed');
-                }
-            } catch (error) {
-                console.error(error);
-                uploadFeedback.textContent = 'Erreur lors du téléchargement. Vérifiez votre connexion.';
-                uploadFeedback.style.color = 'red';
-                uploadBtn.disabled = false;
-            }
-        });
+    // Photo Upload Handler (Disabled for Static Deployment)
+    // GitHub Pages cannot host a Node.js server for file uploads.
+    // The UI is updated to reflect that an external service should be used.
+    const uploadSection = document.getElementById('phototheque');
+    if (uploadSection) {
+        // Optional: you can dynamically replace the content here or let the HTML change handle it.
+        // For now, we will leave the JS clean and handle the UI update in HTML to remove the upload forms.
     }
 });
