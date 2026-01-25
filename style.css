@@ -240,6 +240,13 @@ section {
         font-size: 3rem;
     }
 
+    /* Resize photo on mobile to avoid blocking nav/title */
+    .top-right-photo {
+        width: 100px;
+        top: 10px;
+        right: 10px;
+    }
+
     :root {
         --spacing-xl: 5rem;
     }
