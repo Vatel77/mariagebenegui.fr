@@ -161,20 +161,15 @@ img {
     animation: fadeInUp 1.5s ease-out;
 }
 
-.top-right-photo {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.hero-photo {
+    display: block;
+    margin: 2rem auto 0 auto;
+    /* Center and add space above */
     width: 250px;
     height: auto;
     border-radius: 10px;
-    /* Slight rounded corners */
     border: 3px solid var(--white);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 20;
-    /* Ensure it's above mostly everything */
-    transform: rotate(5deg);
-    /* Playful tilt */
 }
 
 .hero-title {
@@ -240,11 +235,10 @@ section {
         font-size: 3rem;
     }
 
-    /* Resize photo on mobile to avoid blocking nav/title */
-    .top-right-photo {
-        width: 100px;
-        top: 10px;
-        right: 10px;
+    /* Resize photo on mobile if needed */
+    .hero-photo {
+        width: 150px;
+        /* Slightly smaller on mobile */
     }
 
     :root {
