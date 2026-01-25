@@ -237,8 +237,10 @@ section {
 
     /* Resize photo on mobile if needed */
     .hero-photo {
-        width: 150px;
-        /* Slightly smaller on mobile */
+        width: 100px;
+        /* Smaller on mobile to save space */
+        margin-top: 1rem;
+        /* Reduce spacing on mobile */
     }
 
     :root {
