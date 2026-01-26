@@ -12,6 +12,20 @@
 
 <body>
 
+    <!-- Login Overlay -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-box">
+            <h2>Accès Réservé</h2>
+            <p>Veuillez entrer vos identifiants pour accéder au site.</p>
+            <form id="login-form">
+                <input type="text" id="login-user" placeholder="Identifiant" required>
+                <input type="password" id="login-pass" placeholder="Mot de passe" required>
+                <div id="login-error" class="error-msg"></div>
+                <button type="submit" class="btn">Entrer</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <header class="hero">
         <nav class="hero-nav fade-in">

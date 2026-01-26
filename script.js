@@ -1,5 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Authentication Logic
+    const loginOverlay = document.getElementById('login-overlay');
+    const loginForm = document.getElementById('login-form');
+    const loginUser = document.getElementById('login-user');
+    const loginPass = document.getElementById('login-pass');
+    const loginError = document.getElementById('login-error');
+
+    // Hardcoded credentials (server logic replacement)
+    const AUTH_USER = 'BeneGui2026';
+    const AUTH_PASS = 'Amour2026';
+
+    // Check if already logged in
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        if (loginOverlay) loginOverlay.classList.add('hidden');
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = loginUser.value;
+            const pass = loginPass.value;
+
+            if (user === AUTH_USER && pass === AUTH_PASS) {
+                localStorage.setItem('isLoggedIn', 'true');
+                loginOverlay.classList.add('hidden');
+            } else {
+                loginError.textContent = 'Identifiants incorrects';
+                loginForm.reset();
+            }
+        });
+    }
+
     // Intersection Observer for Fade-in Animations
     const observerOptions = {
         root: null,
@@ -27,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
-            
+
             const feedback = document.getElementById('form-feedback');
             feedback.textContent = 'Envoi en cours...';
             feedback.style.color = 'var(--text-color)';
@@ -50,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     feedback.textContent = 'Oups ! Il y a eu un problème lors de l\'envoi du formulaire.';
                     if (result.errors) {
-                         feedback.textContent += ' (' + result.errors.map(error => error.message).join(', ') + ')';
+                        feedback.textContent += ' (' + result.errors.map(error => error.message).join(', ') + ')';
                     }
                     feedback.style.color = 'red';
                 }
