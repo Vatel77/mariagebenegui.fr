@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if already logged in
     if (localStorage.getItem('isLoggedIn') === 'true') {
         if (loginOverlay) loginOverlay.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
     }
 
     if (loginForm) {
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user === AUTH_USER && pass === AUTH_PASS) {
                 localStorage.setItem('isLoggedIn', 'true');
                 loginOverlay.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
             } else {
                 loginError.textContent = 'Identifiants incorrects';
                 loginForm.reset();
